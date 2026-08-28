@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ResearchAreaCard from '../components/ResearchAreaCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import InfoIcon from '../components/InfoIcon.astro';
 
 const siteEntries = await getCollection('site');
 const home = siteEntries.find((entry) => entry.data.page === 'home')?.data;
@@ -24,10 +25,6 @@ const news = (await getCollection('news'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
 
-const people = (await getCollection('people', ({ data }) => data.status === 'current'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
-
 const allPublications = await getCollection('publications');
 const activeProjects = await getCollection('projects', ({ data }) => data.status === 'active');
 const currentResearchers = await getCollection('people', ({ data }) => data.status === 'current');
@@ -45,9 +42,18 @@ const activeResearch = await getCollection('research', ({ data }) => data.status
           <a class="button button-secondary" href="/publications/">View Publications <span>→</span></a>
         </div>
         <div class="identity-row">
-          <div><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'Your University'}</span></div>
-          <div><small>Email</small><strong>{home?.email ?? 'your.email@university.edu'}</strong></div>
-          <div><small>Location</small><strong>{home?.location ?? 'Sharjah, UAE'}</strong></div>
+          <div class="identity-item">
+            <InfoIcon name="affiliation" />
+            <div class="identity-copy"><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'Your University'}</span></div>
+          </div>
+          <div class="identity-item">
+            <InfoIcon name="email" />
+            <div class="identity-copy"><small>Email</small><strong>{home?.email ?? 'your.email@university.edu'}</strong></div>
+          </div>
+          <div class="identity-item">
+            <InfoIcon name="location" />
+            <div class="identity-copy"><small>Location</small><strong>{home?.location ?? 'Sharjah, UAE'}</strong></div>
+          </div>
         </div>
       </div>
       <figure class="hero-media">
@@ -80,7 +86,7 @@ const activeResearch = await getCollection('research', ({ data }) => data.status
     </div>
   </section>
 
-  <section class="section shell lower-grid">
+  <section class="section shell lower-grid lower-grid-two">
     <div>
       <SectionHeading title="Selected Publications" href="/publications/" linkLabel="View all" />
       <ol class="publication-list">
@@ -111,17 +117,5 @@ const activeResearch = await getCollection('research', ({ data }) => data.status
       </div>
     </div>
 
-    <div>
-      <SectionHeading title="Current Researchers" href="/people/" linkLabel="Meet the group" />
-      <div class="people-grid">
-        {people.map((entry) => (
-          <a class="person-card" href={`/people/${entry.id}/`}>
-            <div class="person-photo">{entry.data.photo ? <img src={entry.data.photo} alt="" /> : <span>{entry.data.name.split(' ').map((part) => part[0]).slice(0,2).join('')}</span>}</div>
-            <strong>{entry.data.name}</strong>
-            <small>{entry.data.degree}</small>
-          </a>
-        ))}
-      </div>
-    </div>
   </section>
 </BaseLayout>
