@@ -39,6 +39,11 @@ content:
           values: [journal, conference, workshop, book-chapter, book, preprint, thesis, technical-report]
       - { name: venue, label: Venue, type: string }
       - { name: doi, label: DOI, type: string, required: false }
+      - { name: volume, label: Volume, type: string, required: false }
+      - { name: issue, label: Issue, type: string, required: false }
+      - { name: pages, label: Pages, type: string, required: false }
+      - { name: bibtexKey, label: BibTeX key, type: string, required: false }
+      - { name: bibtexUrl, label: BibTeX file, type: string, required: false }
       - { name: paperUrl, label: Paper URL, type: string, required: false }
       - { name: pdfUrl, label: PDF URL, type: string, required: false }
       - { name: codeUrl, label: Code URL, type: string, required: false }

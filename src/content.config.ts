@@ -39,7 +39,8 @@ const publications = defineCollection({
   schema: z.object({
     title: z.string(), authors: z.array(z.string()), year: z.number(),
     type: z.enum(['journal', 'conference', 'workshop', 'book-chapter', 'book', 'preprint', 'thesis', 'technical-report']), venue: z.string(),
-    doi: z.string().optional(), paperUrl: z.string().url().optional(), pdfUrl: z.string().url().optional(), codeUrl: z.string().url().optional(),
+    doi: z.string().optional(), volume: z.string().optional(), issue: z.string().optional(), pages: z.string().optional(),
+    bibtexKey: z.string().optional(), bibtexUrl: z.string().optional(), paperUrl: z.string().url().optional(), pdfUrl: z.string().url().optional(), codeUrl: z.string().url().optional(),
     videoUrl: z.string().url().optional(), slidesUrl: z.string().url().optional(), researchAreas: z.array(z.string()).default([]),
     projects: z.array(z.string()).default([]), graduateResearchers: z.array(z.string()).default([]), featured: z.boolean().default(false), order: z.number().default(99)
   })

@@ -1,9 +1,50 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const items = (await getCollection('publications')).sort((a,b)=>b.data.year-a.data.year);
+
+const items = (await getCollection('publications')).sort((a,b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+const years = [...new Set(items.map((entry) => entry.data.year))];
+
+const citationDetails = (entry) => {
+  const parts = [];
+  if (entry.data.volume) {
+    let volume = entry.data.volume;
+    if (entry.data.issue) volume += `(${entry.data.issue})`;
+    parts.push(volume);
+  }
+  if (entry.data.pages) parts.push(entry.data.pages);
+  return parts.length ? `, ${parts.join(', ')}` : '';
+};
 ---
 <BaseLayout title="Publications | Your Name">
-  <section class="page-hero shell"><span class="eyebrow">PUBLICATIONS</span><h1>Publications</h1><p>Journal, conference, and workshop publications linked to research areas and projects.</p></section>
-  <section class="section shell"><ol class="publication-list publication-page">{items.map((entry)=><li><h3>{entry.data.title}</h3><p>{entry.data.authors.join(', ')}</p><p><em>{entry.data.venue}</em>, {entry.data.year}</p><div class="mini-links">{entry.data.paperUrl&&<a href={entry.data.paperUrl}>Paper</a>}{entry.data.pdfUrl&&<a href={entry.data.pdfUrl}>PDF</a>}{entry.data.codeUrl&&<a href={entry.data.codeUrl}>Code</a>}{entry.data.videoUrl&&<a href={entry.data.videoUrl}>Video</a>}</div></li>)}</ol></section>
+  <section class="page-hero shell publication-hero">
+    <span class="eyebrow">PUBLICATIONS</span>
+    <h1>Publications</h1>
+    <p>{items.length} journal articles, conference papers, and theses spanning control, robotics, sensing, and intelligent systems.</p>
+  </section>
+
+  <section class="section shell publication-archive">
+    {years.map((year) => (
+      <section class="publication-year-group">
+        <h2>{year}</h2>
+        <ol class="publication-list publication-page">
+          {items.filter((entry) => entry.data.year === year).map((entry) => (
+            <li>
+              <h3>{entry.data.title}</h3>
+              <p class="publication-authors">{entry.data.authors.join(', ')}</p>
+              <p><em>{entry.data.venue}</em>{citationDetails(entry)}, {entry.data.year}</p>
+              <div class="mini-links">
+                {entry.data.paperUrl && <a href={entry.data.paperUrl}>Paper</a>}
+                {entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}
+                {entry.data.doi && <a href={`https://doi.org/${entry.data.doi}`}>DOI</a>}
+                {entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}
+                {entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}
+                {entry.data.bibtexUrl && <a href={entry.data.bibtexUrl}>BibTeX</a>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </section>
 </BaseLayout>

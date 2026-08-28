@@ -15,8 +15,10 @@ const research = (await getCollection('research', ({ data }) => data.status === 
 const projects = (await getCollection('projects', ({ data }) => data.featured && data.status !== 'archived'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
-const publications = (await getCollection('publications', ({ data }) => data.featured))
-  .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order)
+const allPublications = (await getCollection('publications'))
+  .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+const featuredPublications = allPublications.filter((entry) => entry.data.featured);
+const publications = [...featuredPublications, ...allPublications.filter((entry) => !entry.data.featured)]
   .slice(0, 3);
 const news = (await getCollection('news'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -61,7 +63,7 @@ const openPositions = await getCollection('opportunities', ({ data }) => data.st
     <div>
       <SectionHeading title="Selected Publications" href="/publications/" linkLabel="View all" />
       <ol class="publication-list publication-list-compact">
-        {publications.map((entry) => <li><h3>{entry.data.title}</h3><p>{entry.data.venue}, {entry.data.year}</p><div class="mini-links">{entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}{entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}{entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}{entry.data.paperUrl && <a href={entry.data.paperUrl}>Abstract</a>}</div></li>)}
+        {publications.map((entry) => <li><h3>{entry.data.title}</h3><p>{entry.data.venue}, {entry.data.year}</p><div class="mini-links">{entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}{entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}{entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}{entry.data.paperUrl && <a href={entry.data.paperUrl}>Paper</a>}{entry.data.bibtexUrl && <a href={entry.data.bibtexUrl}>BibTeX</a>}</div></li>)}
       </ol>
     </div>
     <div>
