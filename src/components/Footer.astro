@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+const siteEntries = await getCollection('site');
+const home = siteEntries.find((entry) => entry.data.page === 'home')?.data;
+---
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <h3>{home?.name ?? 'Your Name'}</h3>
+      <p class="footer-tagline">{home?.strapline ?? 'Robotics · Control · Intelligent Systems'}</p>
+      <p>Advancing control and robotics through theory, learning, and experimental validation.</p>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <a href="/research/">Research</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a><a href="/people/">People</a><a href="/teaching/">Teaching</a>
+    </div>
+    <div>
+      <h4>Academic</h4>
+      {home?.scholar && <a href={home.scholar}>Google Scholar</a>}
+      {home?.orcid && <a href={home.orcid}>ORCID</a>}
+      {home?.github && <a href={home.github}>GitHub</a>}
+      {home?.linkedin && <a href={home.linkedin}>LinkedIn</a>}
+      {home?.cv && <a href={home.cv}>CV</a>}
+    </div>
+    <div>
+      <h4>Prospective students</h4>
+      <p>Interested in robotics, control, or learning-based systems?</p>
+      <a class="footer-cta" href="/about/#opportunities">Research opportunities →</a>
+    </div>
+  </div>
+  <div class="shell footer-bottom">© {new Date().getFullYear()} {home?.name ?? 'Your Name'}. All rights reserved.</div>
+</footer>

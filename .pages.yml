@@ -1,0 +1,248 @@
+media:
+  input: public/media
+  output: /media
+
+content:
+  - name: research
+    label: Research Areas
+    type: collection
+    path: src/content/research
+    view:
+      fields: [title, status, featured, order]
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: shortDescription, label: Short description, type: text }
+      - { name: order, label: Display order, type: number, default: 99 }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [active, archived]
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: icon, label: Icon key, type: string, required: false }
+      - { name: heroImage, label: Hero image, type: image, required: false }
+      - { name: video, label: Video URL, type: string, required: false }
+      - { name: keywords, label: Keywords, type: string, list: true, required: false }
+      - { name: body, label: Full description, type: rich-text }
+
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    view:
+      fields: [title, status, projectType, featured]
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: shortDescription, label: Short description, type: text }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [active, completed, planned, archived]
+      - { name: projectType, label: Project type, type: string }
+      - { name: startYear, label: Start year, type: number }
+      - { name: endYear, label: End year, type: number, required: false }
+      - name: researchAreas
+        label: Research areas
+        type: reference
+        options:
+          collection: research
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - name: graduateResearchers
+        label: Graduate researchers
+        type: reference
+        options:
+          collection: people
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - name: undergraduateTeam
+        label: Undergraduate team
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: program, label: Program, type: string, required: false }
+          - { name: academicYear, label: Academic year, type: string, required: false }
+          - { name: role, label: Role, type: string, required: false }
+          - { name: linkedin, label: LinkedIn, type: string, required: false }
+      - { name: tags, label: Tags, type: string, list: true, required: false }
+      - { name: image, label: Featured image, type: image }
+      - { name: video, label: Video URL, type: string, required: false }
+      - { name: github, label: GitHub URL, type: string, required: false }
+      - { name: dataset, label: Dataset URL, type: string, required: false }
+      - { name: featured, label: Featured on homepage, type: boolean, default: false }
+      - { name: order, label: Display order, type: number, default: 99 }
+      - { name: body, label: Full project description, type: rich-text }
+
+  - name: people
+    label: Graduate Researchers
+    type: collection
+    path: src/content/people
+    view:
+      fields: [name, degree, status, startYear]
+    fields:
+      - { name: name, label: Name, type: string }
+      - { name: degree, label: Degree / role, type: string }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [current, alumni]
+      - { name: startYear, label: Start year, type: number }
+      - { name: graduationYear, label: Graduation year, type: number, required: false }
+      - name: researchAreas
+        label: Research areas
+        type: reference
+        options:
+          collection: research
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - name: projects
+        label: Projects
+        type: reference
+        options:
+          collection: projects
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - { name: photo, label: Photo, type: image, required: false }
+      - { name: thesisTitle, label: Thesis title, type: string, required: false }
+      - { name: currentPosition, label: Current position (alumni), type: string, required: false }
+      - { name: scholar, label: Google Scholar, type: string, required: false }
+      - { name: linkedin, label: LinkedIn, type: string, required: false }
+      - { name: github, label: GitHub, type: string, required: false }
+      - { name: website, label: Personal website, type: string, required: false }
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: order, label: Display order, type: number, default: 99 }
+      - { name: body, label: Biography, type: rich-text }
+
+  - name: publications
+    label: Publications
+    type: collection
+    path: src/content/publications
+    view:
+      fields: [title, year, type, venue, featured]
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: authors, label: Authors, type: string, list: true }
+      - { name: year, label: Year, type: number }
+      - name: type
+        label: Publication type
+        type: select
+        options:
+          values: [journal, conference, workshop, book-chapter, book, preprint, thesis, technical-report]
+      - { name: venue, label: Venue, type: string }
+      - { name: doi, label: DOI, type: string, required: false }
+      - { name: paperUrl, label: Paper URL, type: string, required: false }
+      - { name: pdfUrl, label: PDF URL, type: string, required: false }
+      - { name: codeUrl, label: Code URL, type: string, required: false }
+      - { name: videoUrl, label: Video URL, type: string, required: false }
+      - { name: slidesUrl, label: Slides URL, type: string, required: false }
+      - name: researchAreas
+        label: Research areas
+        type: reference
+        options:
+          collection: research
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - name: projects
+        label: Projects
+        type: reference
+        options:
+          collection: projects
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - name: graduateResearchers
+        label: Graduate researchers
+        type: reference
+        options:
+          collection: people
+          multiple: true
+          value: "{name}"
+          label: "{primary}"
+      - { name: featured, label: Featured on homepage, type: boolean, default: false }
+      - { name: order, label: Display order, type: number, default: 99 }
+      - { name: body, label: Abstract / notes, type: rich-text, required: false }
+
+  - name: news
+    label: News
+    type: collection
+    path: src/content/news
+    view:
+      fields: [title, date, type]
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: date, label: Date, type: date }
+      - name: type
+        label: Type
+        type: select
+        options:
+          values: [publication, project, award, student, conference, funding, teaching, software, general]
+      - { name: shortDescription, label: Short description, type: text }
+      - { name: image, label: Image, type: image, required: false }
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: body, label: Full news item, type: rich-text, required: false }
+
+  - name: courses
+    label: Courses
+    type: collection
+    path: src/content/courses
+    fields:
+      - { name: code, label: Course code, type: string }
+      - { name: title, label: Course title, type: string }
+      - { name: level, label: Level, type: string }
+      - { name: institution, label: Institution, type: string }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [current, past]
+      - { name: shortDescription, label: Short description, type: text }
+      - { name: topics, label: Topics, type: string, list: true }
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: body, label: Public course details, type: rich-text, required: false }
+
+  - name: homepage
+    label: Homepage Settings
+    type: file
+    path: src/content/site/home.md
+    fields:
+      - { name: page, type: string, hidden: true, default: home }
+      - { name: name, label: Name, type: string }
+      - { name: strapline, label: Strapline, type: string }
+      - { name: academicTitle, label: Academic title, type: string }
+      - { name: heroTitle, label: Hero title, type: string }
+      - { name: heroDescription, label: Hero description, type: text }
+      - { name: heroImage, label: Hero image, type: image }
+      - { name: heroCaption, label: Hero image caption, type: string }
+      - { name: department, label: Department, type: string }
+      - { name: institution, label: Institution, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: location, label: Location, type: string }
+
+  - name: about
+    label: About / Profile
+    type: file
+    path: src/content/site/about.md
+    fields:
+      - { name: page, type: string, hidden: true, default: about }
+      - { name: name, label: Name, type: string }
+      - { name: academicTitle, label: Academic title, type: string }
+      - { name: department, label: Department, type: string }
+      - { name: institution, label: Institution, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: office, label: Office, type: string, required: false }
+      - { name: location, label: Location, type: string }
+      - { name: shortBio, label: Short biography, type: text }
+      - { name: researchStatement, label: Research statement, type: rich-text }
+      - { name: opportunitiesText, label: Prospective student guidance, type: text }
+      - { name: cv, label: CV file/path, type: string, required: false }

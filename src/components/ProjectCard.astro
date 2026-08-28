@@ -1,0 +1,16 @@
+---
+const { entry } = Astro.props;
+---
+<article class="project-card">
+  <a class="project-media" href={`/projects/${entry.id}/`}>
+    <img src={entry.data.image} alt="" loading="lazy" />
+    <span class={`status status-${entry.data.status}`}>{entry.data.status}</span>
+  </a>
+  <div class="project-content">
+    <h3><a href={`/projects/${entry.id}/`}>{entry.data.title}</a></h3>
+    <p>{entry.data.shortDescription}</p>
+    <div class="tag-row">
+      {entry.data.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}
+    </div>
+  </div>
+</article>

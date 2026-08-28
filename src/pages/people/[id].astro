@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('people');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const projects = (await getCollection('projects')).filter((p) => entry.data.projects.includes(p.id));
+const publications = (await getCollection('publications')).filter((p) => p.data.graduateResearchers.includes(entry.id)).sort((a,b)=>b.data.year-a.data.year);
+const research = (await getCollection('research')).filter((r) => entry.data.researchAreas.includes(r.id));
+---
+<BaseLayout title={`${entry.data.name} | People`}>
+  <section class="person-hero shell">
+    <div class="person-photo person-photo-large">{entry.data.photo?<img src={entry.data.photo} alt=""/>:<span>{entry.data.name.split(' ').map((v)=>v[0]).slice(0,2).join('')}</span>}</div>
+    <div><span class="eyebrow">{entry.data.status === 'current' ? 'GRADUATE RESEARCHER' : 'ALUMNUS'}</span><h1>{entry.data.name}</h1><p>{entry.data.degree}</p>{entry.data.thesisTitle&&<p><strong>Thesis:</strong> {entry.data.thesisTitle}</p>}{entry.data.currentPosition&&<p><strong>Current position:</strong> {entry.data.currentPosition}</p>}</div>
+  </section>
+  <section class="section shell detail-grid"><div class="prose"><Content /></div><aside class="project-facts"><h3>Research</h3><p>{research.map((r)=>r.data.title).join(' · ')}</p></aside></section>
+  {projects.length > 0 && <section class="section shell"><h2 class="subsection-title">Projects</h2><div class="listing-grid">{projects.map((p)=><a class="listing-card" href={`/projects/${p.id}/`}><h2>{p.data.title}</h2><p>{p.data.shortDescription}</p></a>)}</div></section>}
+  {publications.length > 0 && <section class="section shell"><h2 class="subsection-title">Publications</h2><ol class="publication-list publication-page">{publications.map((p)=><li><h3>{p.data.title}</h3><p>{p.data.venue}, {p.data.year}</p></li>)}</ol></section>}
+</BaseLayout>

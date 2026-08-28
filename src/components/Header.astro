@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+const siteEntries = await getCollection('site');
+const home = siteEntries.find((entry) => entry.data.page === 'home')?.data;
+---
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="/">
+      <strong>{home?.name ?? 'Your Name'}</strong>
+      <span>{home?.strapline ?? 'Robotics · Control · Intelligent Systems'}</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/research/">Research</a>
+      <a href="/projects/">Projects</a>
+      <a href="/publications/">Publications</a>
+      <a href="/people/">People</a>
+      <a href="/teaching/">Teaching</a>
+      <a href="/about/">About</a>
+    </nav>
+    <button class="menu-button" aria-label="Open menu" aria-controls="mobile-navigation" aria-expanded="false">☰</button>
+  </div>
+  <nav id="mobile-navigation" class="mobile-nav shell" aria-label="Mobile navigation" hidden>
+    <a href="/">Home</a><a href="/research/">Research</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a><a href="/people/">People</a><a href="/teaching/">Teaching</a><a href="/about/">About</a>
+  </nav>
+</header>
+<script>
+  const button = document.querySelector('.menu-button');
+  const menu = document.querySelector('#mobile-navigation');
+  if (button && menu) {
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      menu.toggleAttribute('hidden', open);
+    });
+  }
+</script>

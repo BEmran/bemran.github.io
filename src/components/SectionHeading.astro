@@ -1,0 +1,11 @@
+---
+const { index, title, href, linkLabel } = Astro.props;
+---
+<div class="section-heading">
+  <div class="section-title-row">
+    {index && <span class="section-index">{index}</span>}
+    <h2>{title}</h2>
+    <span class="section-rule"></span>
+  </div>
+  {href && <a class="section-link" href={href}>{linkLabel ?? 'View all'} →</a>}
+</div>
