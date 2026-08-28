@@ -1,0 +1,6 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const items=(await getCollection('news')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+---
+<BaseLayout title="News | Your Name"><section class="page-hero shell"><span class="eyebrow">NEWS</span><h1>News & Highlights</h1></section><section class="section shell news-page">{items.map((entry)=><article><time>{entry.data.date.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</time><h2>{entry.data.title}</h2><p>{entry.data.shortDescription}</p></article>)}</section></BaseLayout>

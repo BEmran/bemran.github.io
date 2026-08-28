@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const current = (await getCollection('people',({data})=>data.status==='current')).sort((a,b)=>a.data.order-b.data.order);
+const alumni = (await getCollection('people',({data})=>data.status==='alumni')).sort((a,b)=>(b.data.graduationYear??0)-(a.data.graduationYear??0));
+---
+<BaseLayout title="People | Your Name">
+  <section class="page-hero shell"><span class="eyebrow">PEOPLE</span><h1>Graduate Researchers</h1><p>Current graduate researchers and alumni supervised across control, robotics, and intelligent systems.</p></section>
+  <section class="section shell"><h2 class="subsection-title">Current Researchers</h2><div class="people-grid people-page">{current.map((entry)=><a class="person-card" href={`/people/${entry.id}/`}><div class="person-photo">{entry.data.photo?<img src={entry.data.photo} alt=""/>:<span>{entry.data.name.split(' ').map((p)=>p[0]).slice(0,2).join('')}</span>}</div><strong>{entry.data.name}</strong><small>{entry.data.degree}</small></a>)}</div></section>
+  <section class="section shell"><h2 class="subsection-title">Alumni</h2><div class="alumni-list">{alumni.map((entry)=><article><strong>{entry.data.name}</strong><span>{entry.data.degree}{entry.data.graduationYear?`, ${entry.data.graduationYear}`:''}</span>{entry.data.currentPosition&&<small>{entry.data.currentPosition}</small>}</article>)}</div></section>
+</BaseLayout>

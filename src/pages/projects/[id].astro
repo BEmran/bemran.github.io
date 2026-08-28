@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('projects');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const publications = (await getCollection('publications')).filter((p) => p.data.projects.includes(entry.id)).sort((a,b)=>b.data.year-a.data.year);
+const people = (await getCollection('people')).filter((p) => entry.data.graduateResearchers.includes(p.id));
+const research = (await getCollection('research')).filter((r) => entry.data.researchAreas.includes(r.id));
+---
+<BaseLayout title={`${entry.data.title} | Projects`}>
+  <section class="project-hero shell">
+    <div class="project-hero-copy"><span class="eyebrow">{entry.data.status} · {entry.data.projectType}</span><h1>{entry.data.title}</h1><p>{entry.data.shortDescription}</p><div class="tag-row">{entry.data.tags.map((tag)=><span>{tag}</span>)}</div></div>
+    <img src={entry.data.image} alt="" />
+  </section>
+  <section class="section shell detail-grid">
+    <div class="prose"><Content /></div>
+    <aside class="project-facts"><h3>Project information</h3><dl><dt>Status</dt><dd>{entry.data.status}</dd><dt>Started</dt><dd>{entry.data.startYear}</dd><dt>Research areas</dt><dd>{research.map((r)=>r.data.title).join(', ')}</dd></dl></aside>
+  </section>
+  {people.length > 0 && <section class="section shell"><h2 class="subsection-title">Graduate Researchers</h2><div class="people-grid people-page">{people.map((p)=><a class="person-card" href={`/people/${p.id}/`}><div class="person-photo"><span>{p.data.name.split(' ').map((v)=>v[0]).slice(0,2).join('')}</span></div><strong>{p.data.name}</strong><small>{p.data.degree}</small></a>)}</div></section>}
+  {entry.data.undergraduateTeam.length > 0 && <section class="section shell"><h2 class="subsection-title">Undergraduate Project Team</h2><div class="undergrad-grid">{entry.data.undergraduateTeam.map((s)=><article><strong>{s.name}</strong>{s.program&&<span>{s.program}</span>}{s.academicYear&&<small>{s.academicYear}</small>}{s.role&&<p>{s.role}</p>}</article>)}</div></section>}
+  {publications.length > 0 && <section class="section shell"><h2 class="subsection-title">Related Publications</h2><ol class="publication-list publication-page">{publications.map((p)=><li><h3>{p.data.title}</h3><p>{p.data.venue}, {p.data.year}</p></li>)}</ol></section>}
+</BaseLayout>

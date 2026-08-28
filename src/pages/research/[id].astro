@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('research');
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const projects = (await getCollection('projects')).filter((p) => p.data.researchAreas.includes(entry.id) && p.data.status !== 'archived');
+const publications = (await getCollection('publications')).filter((p) => p.data.researchAreas.includes(entry.id)).sort((a,b)=>b.data.year-a.data.year);
+const people = (await getCollection('people')).filter((p) => p.data.status === 'current' && p.data.researchAreas.includes(entry.id));
+---
+<BaseLayout title={`${entry.data.title} | Research`}>
+  <section class="page-hero shell">
+    <span class="eyebrow">RESEARCH AREA</span>
+    <h1>{entry.data.title}</h1>
+    <p>{entry.data.shortDescription}</p>
+  </section>
+  <section class="section shell research-detail">
+    <div class="prose"><Content /></div>
+  </section>
+  {projects.length > 0 && <section class="section shell"><h2 class="subsection-title">Related Projects</h2><div class="project-grid">{projects.map((p)=><ProjectCard entry={p}/>)}</div></section>}
+  {people.length > 0 && <section class="section shell"><h2 class="subsection-title">Researchers</h2><div class="people-grid people-page">{people.map((p)=><a class="person-card" href={`/people/${p.id}/`}><div class="person-photo"><span>{p.data.name.split(' ').map((v)=>v[0]).slice(0,2).join('')}</span></div><strong>{p.data.name}</strong><small>{p.data.degree}</small></a>)}</div></section>}
+  {publications.length > 0 && <section class="section shell"><h2 class="subsection-title">Publications</h2><ol class="publication-list publication-page">{publications.map((p)=><li><h3>{p.data.title}</h3><p>{p.data.venue}, {p.data.year}</p></li>)}</ol></section>}
+</BaseLayout>

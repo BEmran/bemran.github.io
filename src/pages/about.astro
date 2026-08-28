@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const entries = await getCollection('site');
+const about = entries.find((entry)=>entry.data.page === 'about')?.data;
+---
+<BaseLayout title={`About | ${about?.name ?? 'Your Name'}`}>
+  <section class="page-hero shell"><span class="eyebrow">ABOUT</span><h1>Academic Profile</h1><p>{about?.shortBio}</p></section>
+  <section class="section shell detail-grid">
+    <div class="prose"><h2>Research profile</h2><p>{about?.researchStatement}</p><h2 id="opportunities">Prospective students</h2><p>{about?.opportunitiesText}</p></div>
+    <aside class="project-facts"><h3>Contact</h3><dl><dt>Department</dt><dd>{about?.department}</dd><dt>Institution</dt><dd>{about?.institution}</dd><dt>Email</dt><dd>{about?.email}</dd><dt>Office</dt><dd>{about?.office}</dd><dt>Location</dt><dd>{about?.location}</dd></dl>{about?.cv&&<a class="footer-cta about-cv" href={about.cv}>Download CV →</a>}</aside>
+  </section>
+</BaseLayout>

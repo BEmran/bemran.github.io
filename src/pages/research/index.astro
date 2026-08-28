@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const items = (await getCollection('research')).sort((a,b) => a.data.order-b.data.order);
+---
+<BaseLayout title="Research | Your Name">
+  <section class="page-hero shell"><span class="eyebrow">RESEARCH</span><h1>Research Areas</h1><p>Long-term research themes connecting theory, learning, and experimental robotic systems.</p></section>
+  <section class="section shell listing-grid">
+    {items.map((item) => <a class="listing-card" href={`/research/${item.id}/`}><h2>{item.data.title}</h2><p>{item.data.shortDescription}</p><span>Explore →</span></a>)}
+  </section>
+</BaseLayout>
