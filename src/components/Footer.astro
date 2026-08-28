@@ -1,31 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
+import ProfileIcon from './ProfileIcon.astro';
 const siteEntries = await getCollection('site');
 const home = siteEntries.find((entry) => entry.data.page === 'home')?.data;
+const about = siteEntries.find((entry) => entry.data.page === 'about')?.data;
 ---
 <footer class="site-footer">
-  <div class="shell footer-grid">
+  <div class="shell footer-grid footer-grid-compact">
     <div>
       <h3>{home?.name ?? 'Your Name'}</h3>
       <p class="footer-tagline">{home?.strapline ?? 'Robotics · Control · Intelligent Systems'}</p>
-      <p>Advancing control and robotics through theory, learning, and experimental validation.</p>
+      <div class="footer-socials">
+        {about?.linkedin && <a aria-label="LinkedIn" href={about.linkedin}><ProfileIcon name="linkedin" /></a>}
+        {about?.scholar && <a aria-label="Google Scholar" href={about.scholar}><ProfileIcon name="scholar" /></a>}
+        {about?.orcid && <a aria-label="ORCID" href={about.orcid}><ProfileIcon name="orcid" /></a>}
+        {about?.scopus && <a aria-label="Scopus" href={about.scopus}><ProfileIcon name="scopus" /></a>}
+      </div>
     </div>
     <div>
       <h4>Quick links</h4>
-      <a href="/research/">Research</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a><a href="/people/">People</a><a href="/teaching/">Teaching</a>
+      <div class="footer-link-columns">
+        <span><a href="/research/">Research</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a><a href="/people/">People</a></span>
+        <span><a href="/teaching/">Teaching</a><a href="/news/">News</a><a href="/about/">About</a><a href="/opportunities/">Opportunities</a></span>
+      </div>
     </div>
     <div>
-      <h4>Academic</h4>
-      {home?.scholar && <a href={home.scholar}>Google Scholar</a>}
-      {home?.orcid && <a href={home.orcid}>ORCID</a>}
-      {home?.github && <a href={home.github}>GitHub</a>}
-      {home?.linkedin && <a href={home.linkedin}>LinkedIn</a>}
-      {home?.cv && <a href={home.cv}>CV</a>}
-    </div>
-    <div>
-      <h4>Prospective students</h4>
-      <p>Interested in robotics, control, or learning-based systems?</p>
-      <a class="footer-cta" href="/about/#opportunities">Research opportunities →</a>
+      <h4>Contact</h4>
+      <p>{about?.department ?? home?.department}<br />{about?.institution ?? home?.institution}<br />{about?.location ?? home?.location}<br />{about?.email ?? home?.email}</p>
     </div>
   </div>
   <div class="shell footer-bottom">© {new Date().getFullYear()} {home?.name ?? 'Your Name'}. All rights reserved.</div>

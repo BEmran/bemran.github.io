@@ -1,10 +1,11 @@
 ---
+import ResearchIcon from './ResearchIcon.astro';
 const { entry, index } = Astro.props;
 ---
 <a class="research-card" href={`/research/${entry.id}/`}>
   <div class="research-card-top">
     <span class="research-number">{String(index).padStart(2, '0')}</span>
-    <span class="research-icon" aria-hidden="true">⌁</span>
+    <ResearchIcon id={entry.id} />
   </div>
   <h3>{entry.data.title}</h3>
   <p>{entry.data.shortDescription}</p>

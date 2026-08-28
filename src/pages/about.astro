@@ -1,13 +1,57 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import InfoIcon from '../components/InfoIcon.astro';
+import ProfileIcon from '../components/ProfileIcon.astro';
+import ResearchIcon from '../components/ResearchIcon.astro';
+
 const entries = await getCollection('site');
-const about = entries.find((entry)=>entry.data.page === 'about')?.data;
+const about = entries.find((entry) => entry.data.page === 'about')?.data;
+const research = (await getCollection('research', ({ data }) => data.status === 'active')).sort((a,b)=>a.data.order-b.data.order).slice(0,4);
+const profileLinks = [
+  { key:'linkedin', label:'LinkedIn', url:about?.linkedin, icon:'linkedin' },
+  { key:'scholar', label:'Google Scholar', url:about?.scholar, icon:'scholar' },
+  { key:'orcid', label:'ORCID', url:about?.orcid, icon:'orcid' },
+  { key:'scopus', label:'Scopus', url:about?.scopus, icon:'scopus' },
+  { key:'university', label:'AUS Profile', url:about?.universityProfile, icon:'aus', logo:about?.universityProfileLogo }
+].filter((item)=>item.url);
 ---
 <BaseLayout title={`About | ${about?.name ?? 'Your Name'}`}>
-  <section class="page-hero shell"><span class="eyebrow">ABOUT</span><h1>Academic Profile</h1><p>{about?.shortBio}</p></section>
-  <section class="section shell detail-grid">
-    <div class="prose"><h2>Research profile</h2><p>{about?.researchStatement}</p><h2 id="opportunities">Prospective students</h2><p>{about?.opportunitiesText}</p></div>
-    <aside class="project-facts"><h3>Contact</h3><dl><dt>Department</dt><dd>{about?.department}</dd><dt>Institution</dt><dd>{about?.institution}</dd><dt>Email</dt><dd>{about?.email}</dd><dt>Office</dt><dd>{about?.office}</dd><dt>Location</dt><dd>{about?.location}</dd></dl>{about?.cv&&<a class="footer-cta about-cv" href={about.cv}>Download CV →</a>}</aside>
+  <section class="about-hero shell">
+    <figure class="about-photo"><img src={about?.profileImage ?? '/media/profile-placeholder.svg'} alt={`${about?.name ?? 'Academic'} profile`} /></figure>
+    <div class="about-intro">
+      <span class="eyebrow">ABOUT</span>
+      <h1>{about?.aboutTitle ?? 'Researcher, Educator, and Advisor in Robotics and Intelligent Systems'}</h1>
+      <p>{about?.shortBio}</p>
+      {about?.mentoringStatement && <p>{about.mentoringStatement}</p>}
+      <div class="about-contact-row">
+        <div><InfoIcon name="affiliation" /><span>{about?.department}<br />{about?.institution}</span></div>
+        <div><InfoIcon name="email" /><a href={`mailto:${about?.email}`}>{about?.email}</a></div>
+        <div><InfoIcon name="location" /><span>{about?.location}</span></div>
+      </div>
+    </div>
+  </section>
+
+  {profileLinks.length > 0 && <section class="shell profile-link-grid">
+    {profileLinks.map((item) => <a class="profile-link-card" href={item.url} target="_blank" rel="noreferrer">{item.logo ? <img class="profile-brand-logo" src={item.logo} alt="" /> : <ProfileIcon name={item.icon} />}<strong>{item.label}</strong><span>↗</span></a>)}
+  </section>}
+
+  <section class="section section-compact shell about-research">
+    <h2 class="about-section-title">Research Interests</h2>
+    <div class="about-research-grid">
+      {research.map((entry) => <a href={`/research/${entry.id}/`}><ResearchIcon id={entry.id} /><div><h3>{entry.data.title}</h3><p>{entry.data.shortDescription}</p></div></a>)}
+    </div>
+  </section>
+
+  <section class="section section-compact shell about-details-grid">
+    <div class="about-list-block"><h2>Academic Appointments</h2><div class="timeline-list">{about?.appointments?.map((item) => <article><time>{item.period}</time><p><strong>{item.title}</strong>{item.institution && <><br />{item.institution}</>}</p></article>)}</div></div>
+    <div class="about-list-block"><h2>Education</h2><div class="timeline-list">{about?.education?.map((item) => <article><time>{item.year}</time><p><strong>{item.degree}</strong>{item.institution && <><br />{item.institution}</>}</p></article>)}</div></div>
+    <div class="about-list-block"><h2>Selected Awards & Honors</h2><ul class="clean-list">{about?.awards?.map((item) => <li>{item}</li>)}</ul></div>
+    <div class="about-list-block"><h2>Professional Service</h2><ul class="clean-list">{about?.service?.map((item) => <li>{item}</li>)}</ul></div>
+  </section>
+
+  <section class="shell about-opportunity-callout">
+    <div><span class="opportunity-icon" aria-hidden="true">◎</span><div><h2>Interested in joining the research group?</h2><p>{about?.opportunitiesText ?? 'Current openings and general research opportunities are listed on the Opportunities page.'}</p></div></div>
+    <a class="button button-primary" href="/opportunities/">View current research opportunities <span>→</span></a>
   </section>
 </BaseLayout>

@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const siteEntries = await getCollection('site');
+const about = siteEntries.find((entry)=>entry.data.page==='about')?.data;
+const opportunities = (await getCollection('opportunities')).sort((a,b)=>a.data.order-b.data.order);
+const open = opportunities.filter((entry)=>entry.data.status==='open');
+const coming = opportunities.filter((entry)=>entry.data.status==='coming-soon');
+const closed = opportunities.filter((entry)=>entry.data.status==='closed');
+---
+<BaseLayout title="Research Opportunities">
+  <section class="page-hero shell opportunities-hero"><span class="eyebrow">OPPORTUNITIES</span><h1>Research Opportunities</h1><p>Current openings and pathways to work with the research group in robotics, control, and intelligent systems.</p></section>
+  <section class="shell opportunity-page-section">
+    <h2>Current Openings</h2>
+    {open.length ? <div class="opportunity-list">{open.map((entry)=><article class="opportunity-card"><div class="opportunity-card-head"><span>{entry.data.type.replace('-', ' ')}</span><strong>Open</strong></div><h3>{entry.data.title}</h3><p>{entry.data.shortDescription}</p><dl>{entry.data.deadline && <><dt>Deadline</dt><dd>{entry.data.deadline.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</dd></>}{entry.data.funding && <><dt>Funding</dt><dd>{entry.data.funding}</dd></>}</dl>{entry.data.applyUrl && <a class="text-link" href={entry.data.applyUrl}>Application details →</a>}{!entry.data.applyUrl && entry.data.applyEmail && <a class="text-link" href={`mailto:${entry.data.applyEmail}`}>Contact by email →</a>}</article>)}</div> : <div class="empty-state"><strong>No specific advertised positions are currently listed.</strong><p>You can still review the general research guidance below and check this page again for future openings.</p></div>}
+  </section>
+  {coming.length > 0 && <section class="section section-compact shell opportunity-page-section"><h2>Upcoming Opportunities</h2><div class="opportunity-list">{coming.map((entry)=><article class="opportunity-card"><div class="opportunity-card-head"><span>{entry.data.type.replace('-', ' ')}</span><strong>Coming soon</strong></div><h3>{entry.data.title}</h3><p>{entry.data.shortDescription}</p></article>)}</div></section>}
+  <section class="section section-compact shell general-inquiries"><h2>General Research Inquiries</h2><p>{about?.opportunitiesText}</p>{about?.email && <a class="button button-secondary" href={`mailto:${about.email}`}>Contact by Email <span>→</span></a>}</section>
+  {closed.length > 0 && <details class="shell closed-opportunities"><summary>Past / Closed Opportunities</summary><div class="opportunity-list">{closed.map((entry)=><article class="opportunity-card opportunity-card-closed"><h3>{entry.data.title}</h3><p>{entry.data.shortDescription}</p></article>)}</div></details>}
+</BaseLayout>

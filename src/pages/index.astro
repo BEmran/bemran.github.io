@@ -12,48 +12,32 @@ const home = siteEntries.find((entry) => entry.data.page === 'home')?.data;
 const research = (await getCollection('research', ({ data }) => data.status === 'active'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
-
 const projects = (await getCollection('projects', ({ data }) => data.featured && data.status !== 'archived'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
-
 const publications = (await getCollection('publications', ({ data }) => data.featured))
   .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order)
-  .slice(0, 4);
-
+  .slice(0, 3);
 const news = (await getCollection('news'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
-
-const allPublications = await getCollection('publications');
-const activeProjects = await getCollection('projects', ({ data }) => data.status === 'active');
-const currentResearchers = await getCollection('people', ({ data }) => data.status === 'current');
-const activeResearch = await getCollection('research', ({ data }) => data.status === 'active');
+  .slice(0, 4);
+const openPositions = await getCollection('opportunities', ({ data }) => data.status === 'open');
 ---
 <BaseLayout>
-  <section class="hero">
+  <section class="hero hero-compact">
     <div class="shell hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">{home?.academicTitle ?? 'ASSISTANT PROFESSOR'}</span>
-        <h1>{home?.heroTitle ?? 'Advancing Intelligent Control and Autonomous Robotic Systems'}</h1>
+        <h1>{home?.heroTitle ?? 'Control, Learning & Autonomous Robotics'}</h1>
         <p class="hero-description">{home?.heroDescription ?? 'Research at the intersection of control theory, learning, and robotics, with emphasis on safe, efficient, and experimentally validated autonomous systems.'}</p>
         <div class="hero-actions">
           <a class="button button-primary" href="/research/">Explore Research <span>→</span></a>
           <a class="button button-secondary" href="/publications/">View Publications <span>→</span></a>
         </div>
         <div class="identity-row">
-          <div class="identity-item">
-            <InfoIcon name="affiliation" />
-            <div class="identity-copy"><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'Your University'}</span></div>
-          </div>
-          <div class="identity-item">
-            <InfoIcon name="email" />
-            <div class="identity-copy"><small>Email</small><strong>{home?.email ?? 'your.email@university.edu'}</strong></div>
-          </div>
-          <div class="identity-item">
-            <InfoIcon name="location" />
-            <div class="identity-copy"><small>Location</small><strong>{home?.location ?? 'Sharjah, UAE'}</strong></div>
-          </div>
+          <div class="identity-item"><InfoIcon name="affiliation" /><div class="identity-copy"><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'Your University'}</span></div></div>
+          <div class="identity-item"><InfoIcon name="email" /><div class="identity-copy"><small>Email</small><strong>{home?.email ?? 'your.email@university.edu'}</strong></div></div>
+          <div class="identity-item"><InfoIcon name="location" /><div class="identity-copy"><small>Location</small><strong>{home?.location ?? 'Sharjah, UAE'}</strong></div></div>
         </div>
       </div>
       <figure class="hero-media">
@@ -63,59 +47,33 @@ const activeResearch = await getCollection('research', ({ data }) => data.status
     </div>
   </section>
 
-  <section class="section shell">
-    <SectionHeading index="01" title="Research Areas" href="/research/" linkLabel="View all research areas" />
-    <div class="research-grid">
-      {research.map((entry, index) => <ResearchAreaCard entry={entry} index={index + 1} />)}
-    </div>
+  <section class="section section-compact shell">
+    <SectionHeading title="Research Areas" href="/research/" linkLabel="View all research areas" />
+    <div class="research-grid">{research.map((entry, index) => <ResearchAreaCard entry={entry} index={index + 1} />)}</div>
   </section>
 
-  <section class="section shell">
-    <SectionHeading index="02" title="Featured Projects" href="/projects/" linkLabel="View all projects" />
-    <div class="project-grid">
-      {projects.map((entry) => <ProjectCard entry={entry} />)}
-    </div>
+  <section class="section section-compact shell">
+    <SectionHeading title="Featured Projects" href="/projects/" linkLabel="View all projects" />
+    <div class="project-grid">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
   </section>
 
-  <section class="snapshot">
-    <div class="shell metrics-grid">
-      <div><strong>{allPublications.length}</strong><span>Publications</span></div>
-      <div><strong>{activeProjects.length}</strong><span>Active Projects</span></div>
-      <div><strong>{currentResearchers.length}</strong><span>Graduate Researchers</span></div>
-      <div><strong>{activeResearch.length}</strong><span>Research Areas</span></div>
-    </div>
-  </section>
-
-  <section class="section shell lower-grid lower-grid-two">
+  <section class="section section-compact shell lower-grid lower-grid-two home-lower">
     <div>
       <SectionHeading title="Selected Publications" href="/publications/" linkLabel="View all" />
-      <ol class="publication-list">
-        {publications.map((entry) => (
-          <li>
-            <h3>{entry.data.title}</h3>
-            <p>{entry.data.venue}, {entry.data.year}</p>
-            <div class="mini-links">
-              {entry.data.paperUrl && <a href={entry.data.paperUrl}>Abstract</a>}
-              {entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}
-              {entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}
-              {entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}
-            </div>
-          </li>
-        ))}
+      <ol class="publication-list publication-list-compact">
+        {publications.map((entry) => <li><h3>{entry.data.title}</h3><p>{entry.data.venue}, {entry.data.year}</p><div class="mini-links">{entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}{entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}{entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}{entry.data.paperUrl && <a href={entry.data.paperUrl}>Abstract</a>}</div></li>)}
       </ol>
     </div>
-
     <div>
       <SectionHeading title="Latest News" href="/news/" linkLabel="View all" />
-      <div class="news-timeline">
-        {news.map((entry) => (
-          <article>
-            <time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</time>
-            <p>{entry.data.shortDescription}</p>
-          </article>
-        ))}
+      <div class="news-timeline news-timeline-compact">
+        {news.map((entry) => <article><time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</time><p>{entry.data.shortDescription}</p></article>)}
       </div>
     </div>
+  </section>
 
+  <section class="shell opportunities-strip">
+    <div><span class="eyebrow">RESEARCH OPPORTUNITIES</span><strong>{openPositions.length ? `${openPositions.length} current ${openPositions.length === 1 ? 'opening' : 'openings'}` : 'Interested in joining the research group?'}</strong><p>Graduate, undergraduate, and collaborative research opportunities are listed in one place.</p></div>
+    <a class="button button-secondary" href="/opportunities/">View Opportunities <span>→</span></a>
   </section>
 </BaseLayout>

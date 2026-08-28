@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e7eef3"/><stop offset="1" stop-color="#c8d9e2"/></linearGradient></defs>
+  <rect width="600" height="720" fill="url(#g)"/>
+  <circle cx="300" cy="245" r="105" fill="#9fb7c5"/>
+  <path d="M115 720c18-180 95-285 185-285s167 105 185 285" fill="#173e67" opacity=".92"/>
+  <path d="M215 425l85 85 85-85" fill="#fff" opacity=".85"/>
+  <text x="300" y="650" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#fff">Replace with profile photograph</text>
+</svg>
