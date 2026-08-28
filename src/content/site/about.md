@@ -2,6 +2,7 @@
 page: about
 name: Bara J. Emran
 academicTitle: Assistant Professor
+profileImage: /media/20240714_232810.jpg
 department: Department of Electrical Engineering
 institution: American University of Sharjah
 email: bemran@aus.edu
@@ -19,4 +20,10 @@ opportunitiesText: Prospective graduate researchers and students interested in
   research projects can review current opportunities here. When contacting me,
   include a short description of your research interests and relevant technical
   background.
+linkedin: https://www.linkedin.com/in/bara-emran/
+scholar: https://scholar.google.com/citations?user=kMAXFDUAAAAJ
+orcid: https://orcid.org/my-orcid?orcid=0000-0002-2927-2689
+scopus: https://www.scopus.com/authid/detail.uri?authorId=56811412800
+universityProfile: https://www.aus.edu/faculty/bara-emran
+universityProfileLogo: /media/American_University_of_Sharjah_(emblem).png
 ---
