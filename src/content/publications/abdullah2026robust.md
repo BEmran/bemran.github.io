@@ -9,9 +9,11 @@ venue: 2026 8th International Youth Conference on Radio Electronics, Electrical 
 pages: 1–7
 bibtexKey: abdullah2026robust
 bibtexUrl: /bib/abdullah2026robust.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
-graduateResearchers: []
-featured: false
-order: 99
+graduateResearchers:
+- mohamed-h-abdullah
+featured: true
+order: 3
 ---

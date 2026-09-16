@@ -12,7 +12,8 @@ issue: '8'
 pages: '823'
 bibtexKey: emran2017low
 bibtexUrl: /bib/emran2017low.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

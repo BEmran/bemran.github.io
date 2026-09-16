@@ -12,7 +12,8 @@ issue: '3'
 pages: 120–132
 bibtexKey: gupta2019vision
 bibtexUrl: /bib/gupta2019vision.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

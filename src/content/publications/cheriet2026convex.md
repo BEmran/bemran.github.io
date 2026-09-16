@@ -10,9 +10,12 @@ type: journal
 venue: IEEE Access
 bibtexKey: cheriet2026convex
 bibtexUrl: /bib/cheriet2026convex.bib
-researchAreas: []
-projects: []
+researchAreas:
+- autonomous-robotics-planning
+- safe-learning-control
+projects:
+- autonomous-navigation-planning
 graduateResearchers: []
-featured: false
-order: 99
+featured: true
+order: 2
 ---

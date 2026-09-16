@@ -10,7 +10,9 @@ volume: '46'
 pages: 165–180
 bibtexKey: emran2018review
 bibtexUrl: /bib/emran2018review.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

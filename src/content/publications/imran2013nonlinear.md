@@ -9,7 +9,8 @@ venue: The International Conference on Electrical and Electronics Engineering, C
 pages: 220–231
 bibtexKey: imran2013nonlinear
 bibtexUrl: /bib/imran2013nonlinear.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

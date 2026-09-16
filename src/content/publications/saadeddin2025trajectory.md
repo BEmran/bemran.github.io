@@ -10,7 +10,9 @@ venue: 2025 Advances in Science and Engineering Technology International Confere
 pages: 1–7
 bibtexKey: saadeddin2025trajectory
 bibtexUrl: /bib/saadeddin2025trajectory.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

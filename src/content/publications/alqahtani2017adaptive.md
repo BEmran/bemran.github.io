@@ -10,7 +10,8 @@ venue: 2017 IEEE International Conference on Systems, Man, and Cybernetics (SMC)
 pages: 2625–2630
 bibtexKey: alqahtani2017adaptive
 bibtexUrl: /bib/alqahtani2017adaptive.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

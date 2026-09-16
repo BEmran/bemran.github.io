@@ -11,7 +11,8 @@ venue: 2015 34th Chinese Control Conference (CCC)
 pages: 3252–3257
 bibtexKey: emran2015robust
 bibtexUrl: /bib/emran2015robust.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

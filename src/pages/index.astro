@@ -37,8 +37,8 @@ const openPositions = await getCollection('opportunities', ({ data }) => data.st
           <a class="button button-secondary" href="/publications/">View Publications <span>→</span></a>
         </div>
         <div class="identity-row">
-          <div class="identity-item"><InfoIcon name="affiliation" /><div class="identity-copy"><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'Your University'}</span></div></div>
-          <div class="identity-item"><InfoIcon name="email" /><div class="identity-copy"><small>Email</small><strong>{home?.email ?? 'your.email@university.edu'}</strong></div></div>
+          <div class="identity-item"><InfoIcon name="affiliation" /><div class="identity-copy"><small>Affiliation</small><strong>{home?.department ?? 'Department of Electrical Engineering'}</strong><span>{home?.institution ?? 'American University of Sharjah'}</span></div></div>
+          <div class="identity-item"><InfoIcon name="email" /><div class="identity-copy"><small>Email</small><strong>{home?.email ?? 'bemran@aus.edu'}</strong></div></div>
           <div class="identity-item"><InfoIcon name="location" /><div class="identity-copy"><small>Location</small><strong>{home?.location ?? 'Sharjah, UAE'}</strong></div></div>
         </div>
       </div>
@@ -59,19 +59,19 @@ const openPositions = await getCollection('opportunities', ({ data }) => data.st
     <div class="project-grid">{projects.map((entry) => <ProjectCard entry={entry} />)}</div>
   </section>
 
-  <section class="section section-compact shell lower-grid lower-grid-two home-lower">
+  <section class={`section section-compact shell lower-grid home-lower ${news.length ? 'lower-grid-two' : 'lower-grid-one'}`}>
     <div>
       <SectionHeading title="Selected Publications" href="/publications/" linkLabel="View all" />
       <ol class="publication-list publication-list-compact">
         {publications.map((entry) => <li><h3>{entry.data.title}</h3><p>{entry.data.venue}, {entry.data.year}</p><div class="mini-links">{entry.data.pdfUrl && <a href={entry.data.pdfUrl}>PDF</a>}{entry.data.codeUrl && <a href={entry.data.codeUrl}>Code</a>}{entry.data.videoUrl && <a href={entry.data.videoUrl}>Video</a>}{entry.data.paperUrl && <a href={entry.data.paperUrl}>Paper</a>}{entry.data.bibtexUrl && <a href={entry.data.bibtexUrl}>BibTeX</a>}</div></li>)}
       </ol>
     </div>
-    <div>
+    {news.length > 0 && <div>
       <SectionHeading title="Latest News" href="/news/" linkLabel="View all" />
       <div class="news-timeline news-timeline-compact">
         {news.map((entry) => <article><time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</time><p>{entry.data.shortDescription}</p></article>)}
       </div>
-    </div>
+    </div>}
   </section>
 
   <section class="shell opportunities-strip">

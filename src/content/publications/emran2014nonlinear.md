@@ -7,7 +7,8 @@ type: thesis
 venue: Doctoral thesis
 bibtexKey: emran2014nonlinear
 bibtexUrl: /bib/emran2014nonlinear.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

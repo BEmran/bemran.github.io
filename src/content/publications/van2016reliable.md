@@ -11,7 +11,8 @@ venue: 2016 IEEE International Conference on Systems, Man, and Cybernetics (SMC)
 pages: 003731–003735
 bibtexKey: van2016reliable
 bibtexUrl: /bib/van2016reliable.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

@@ -11,7 +11,8 @@ issue: '2'
 pages: 213–225
 bibtexKey: emran2014robust
 bibtexUrl: /bib/emran2014robust.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

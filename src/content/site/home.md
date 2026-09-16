@@ -1,14 +1,14 @@
 ---
 page: home
-name: Your Name
-strapline: Robotics · Control · Intelligent Systems
+name: Bara Emran
+strapline: Control · Learning · Robotics
 academicTitle: Assistant Professor
 heroTitle: Control, Learning & Autonomous Robotics
-heroDescription: Research at the intersection of control theory, learning, and robotics, with emphasis on safe, efficient, and experimentally validated autonomous systems.
+heroDescription: Research on safe learning-augmented nonlinear control, data-driven predictive control, and autonomous robotics, with emphasis on stability, uncertainty, and real-time experimental validation.
 heroImage: /media/hero-lab.svg
-heroCaption: Learning-based control on autonomous robotic platforms
+heroCaption: From control theory to experimentally validated robotic systems
 department: Department of Electrical Engineering
 institution: American University of Sharjah
-email: your.email@aus.edu
-location: Sharjah, UAE
+email: bemran@aus.edu
+location: Sharjah, United Arab Emirates
 ---

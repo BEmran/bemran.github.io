@@ -142,7 +142,7 @@ content:
         label: Status
         type: select
         options: { values: [current, alumni] }
-      - { name: startYear, label: Start year, type: number }
+      - { name: startYear, label: Start year, type: number, required: false }
       - { name: graduationYear, label: Graduation year, type: number, required: false }
       - name: researchAreas
         label: Research areas
@@ -194,7 +194,7 @@ content:
     type: collection
     path: src/content/courses
     fields:
-      - { name: code, label: Course code, type: string }
+      - { name: code, label: Course code, type: string, required: false }
       - { name: title, label: Course title, type: string }
       - { name: level, label: Level, type: string }
       - { name: institution, label: Institution, type: string }

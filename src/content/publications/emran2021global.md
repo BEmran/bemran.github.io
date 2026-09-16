@@ -11,7 +11,8 @@ issue: '1'
 pages: 240–256
 bibtexKey: emran2021global
 bibtexUrl: /bib/emran2021global.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

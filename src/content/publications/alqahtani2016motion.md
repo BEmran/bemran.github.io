@@ -10,7 +10,8 @@ venue: Proceedings of SAI Intelligent Systems Conference
 pages: 537–547
 bibtexKey: alqahtani2016motion
 bibtexUrl: /bib/alqahtani2016motion.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

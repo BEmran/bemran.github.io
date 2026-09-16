@@ -12,7 +12,8 @@ volume: '15'
 pages: 268–277
 bibtexKey: emran2014cascaded
 bibtexUrl: /bib/emran2014cascaded.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

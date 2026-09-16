@@ -9,9 +9,12 @@ type: journal
 venue: IEEE Access
 bibtexKey: abdullah2026risk
 bibtexUrl: /bib/abdullah2026risk.bib
-researchAreas: []
-projects: []
-graduateResearchers: []
-featured: false
-order: 99
+researchAreas:
+- autonomous-robotics-planning
+projects:
+- autonomous-navigation-planning
+graduateResearchers:
+- mohamed-h-abdullah
+featured: true
+order: 1
 ---

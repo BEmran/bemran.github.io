@@ -10,8 +10,10 @@ type: journal
 venue: IEEE Access
 bibtexKey: sarkis2025adaptive
 bibtexUrl: /bib/sarkis2025adaptive.bib
-researchAreas: []
-projects: []
+researchAreas:
+- autonomous-robotics-planning
+projects:
+- autonomous-navigation-planning
 graduateResearchers: []
 featured: false
 order: 99

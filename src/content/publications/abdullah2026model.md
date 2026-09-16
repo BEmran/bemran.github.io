@@ -9,9 +9,12 @@ venue: 2026 8th International Youth Conference on Radio Electronics, Electrical 
 pages: 1–6
 bibtexKey: abdullah2026model
 bibtexUrl: /bib/abdullah2026model.bib
-researchAreas: []
-projects: []
-graduateResearchers: []
+researchAreas:
+- autonomous-robotics-planning
+projects:
+- autonomous-navigation-planning
+graduateResearchers:
+- mohamed-h-abdullah
 featured: false
 order: 99
 ---

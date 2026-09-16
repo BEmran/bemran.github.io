@@ -14,7 +14,8 @@ volume: '69'
 pages: 149–164
 bibtexKey: al2018precision
 bibtexUrl: /bib/al2018precision.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

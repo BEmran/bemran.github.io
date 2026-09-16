@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-const courses=await getCollection('courses');
+const courses=(await getCollection('courses')).sort((a,b)=>Number(b.data.featured)-Number(a.data.featured) || a.data.title.localeCompare(b.data.title));
 ---
-<BaseLayout title="Teaching | Your Name"><section class="page-hero shell"><span class="eyebrow">TEACHING</span><h1>Teaching</h1><p>Selected current and recent courses, with public-facing course descriptions and resources.</p></section><section class="section shell listing-grid">{courses.map((c)=><article class="listing-card"><span class="eyebrow">{c.data.code} · {c.data.level}</span><h2>{c.data.title}</h2><p>{c.data.shortDescription}</p></article>)}</section></BaseLayout>
+<BaseLayout title="Teaching | Bara Emran"><section class="page-hero shell"><span class="eyebrow">TEACHING</span><h1>Teaching</h1><p>Hands-on courses connecting control, robotics, digital systems, and embedded implementation.</p></section><section class="section shell listing-grid">{courses.map((c)=><article class="listing-card"><span class="eyebrow">{c.data.code ? `${c.data.code} · ` : ''}{c.data.level}</span><h2>{c.data.title}</h2><p>{c.data.shortDescription}</p></article>)}</section></BaseLayout>

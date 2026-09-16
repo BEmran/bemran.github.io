@@ -10,9 +10,13 @@ venue: 2026 8th International Youth Conference on Radio Electronics, Electrical 
 pages: 1–6
 bibtexKey: elayyan2026development
 bibtexUrl: /bib/elayyan2026development.bib
-researchAreas: []
-projects: []
-graduateResearchers: []
+researchAreas:
+- nonlinear-adaptive-control
+- autonomous-robotics-planning
+projects:
+- three-dof-uav-testbed
+graduateResearchers:
+- mohamed-h-abdullah
 featured: false
 order: 99
 ---

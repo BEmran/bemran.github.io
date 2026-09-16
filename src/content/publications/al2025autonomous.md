@@ -17,7 +17,9 @@ volume: '23'
 pages: 1434–1461
 bibtexKey: al2025autonomous
 bibtexUrl: /bib/al2025autonomous.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
+- safe-learning-control
 projects: []
 graduateResearchers: []
 featured: false

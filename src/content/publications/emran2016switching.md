@@ -9,7 +9,8 @@ venue: 2016 IEEE International Conference on Systems, Man, and Cybernetics (SMC)
 pages: 004872–004877
 bibtexKey: emran2016switching
 bibtexUrl: /bib/emran2016switching.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

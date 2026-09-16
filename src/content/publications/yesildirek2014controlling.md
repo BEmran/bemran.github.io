@@ -11,7 +11,8 @@ issue: '3'
 pages: 187–192
 bibtexKey: yesildirek2014controlling
 bibtexUrl: /bib/yesildirek2014controlling.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

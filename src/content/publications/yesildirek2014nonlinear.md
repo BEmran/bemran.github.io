@@ -9,7 +9,8 @@ venue: 2014 American Control Conference
 pages: 3844–3849
 bibtexKey: yesildirek2014nonlinear
 bibtexUrl: /bib/yesildirek2014nonlinear.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

@@ -9,7 +9,8 @@ venue: 2026 8th International Youth Conference on Radio Electronics, Electrical 
 pages: 1–6
 bibtexKey: khan2026design
 bibtexUrl: /bib/khan2026design.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

@@ -11,7 +11,8 @@ venue: 2018 IEEE Frontiers in Education Conference (FIE)
 pages: 1–9
 bibtexKey: o2018autonomous
 bibtexUrl: /bib/o2018autonomous.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

@@ -13,7 +13,8 @@ issue: '3'
 pages: '031010'
 bibtexKey: emran2015hybrid
 bibtexUrl: /bib/emran2015hybrid.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

@@ -27,7 +27,7 @@ const projects = defineCollection({
 const people = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/people' }),
   schema: z.object({
-    name: z.string(), degree: z.string(), status: z.enum(['current', 'alumni']), startYear: z.number(), graduationYear: z.number().optional(),
+    name: z.string(), degree: z.string(), status: z.enum(['current', 'alumni']), startYear: z.number().optional(), graduationYear: z.number().optional(),
     researchAreas: z.array(z.string()).default([]), projects: z.array(z.string()).default([]), photo: z.string().optional(),
     thesisTitle: z.string().optional(), currentPosition: z.string().optional(), scholar: z.string().url().optional(), linkedin: z.string().url().optional(),
     github: z.string().url().optional(), website: z.string().url().optional(), featured: z.boolean().default(false), order: z.number().default(99)
@@ -57,7 +57,7 @@ const news = defineCollection({
 
 const courses = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/courses' }),
-  schema: z.object({ code: z.string(), title: z.string(), level: z.string(), institution: z.string(), status: z.enum(['current', 'past']), shortDescription: z.string(), topics: z.array(z.string()).default([]), featured: z.boolean().default(false) })
+  schema: z.object({ code: z.string().optional(), title: z.string(), level: z.string(), institution: z.string(), status: z.enum(['current', 'past']), shortDescription: z.string(), topics: z.array(z.string()).default([]), featured: z.boolean().default(false) })
 });
 
 const opportunities = defineCollection({

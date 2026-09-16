@@ -7,7 +7,8 @@ type: thesis
 venue: University of British Columbia
 bibtexKey: emran2019globally
 bibtexUrl: /bib/emran2019globally.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
 projects: []
 graduateResearchers: []
 featured: false

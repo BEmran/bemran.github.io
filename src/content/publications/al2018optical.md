@@ -12,7 +12,8 @@ venue: Sensors for Diagnostics and Monitoring
 pages: 301–328
 bibtexKey: al2018optical
 bibtexUrl: /bib/al2018optical.bib
-researchAreas: []
+researchAreas:
+- autonomous-robotics-planning
 projects: []
 graduateResearchers: []
 featured: false

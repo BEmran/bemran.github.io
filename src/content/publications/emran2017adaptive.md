@@ -9,7 +9,9 @@ venue: 2017 IEEE International Conference on Systems, Man, and Cybernetics (SMC)
 pages: 2619–2624
 bibtexKey: emran2017adaptive
 bibtexUrl: /bib/emran2017adaptive.bib
-researchAreas: []
+researchAreas:
+- nonlinear-adaptive-control
+- safe-learning-control
 projects: []
 graduateResearchers: []
 featured: false
